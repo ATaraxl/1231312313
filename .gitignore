@@ -1,25 +1,16 @@
 # Python
 __pycache__/
-*.py[cod]
+*.pyc
 *.pyo
 *.pyd
 
-# Virtual env
-.venv/
-venv/
-env/
+# Runtime artifacts
+.history/
+整理日志.txt
+*.log
 
-# Build
-build/
-dist/
-*.egg-info/
-
-# OS / Editor
+# OS / editor
 .DS_Store
 Thumbs.db
 .vscode/
 .idea/
-
-# Tool runtime artifacts
-.history/
-整理日志.txt
