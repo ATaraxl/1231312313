@@ -1,17 +1,17 @@
 <div align="center">
-  <h1>漫画整理脚本</h1>
+  <h1>📚 漫画整理脚本</h1>
   <p>一个面向中文使用场景的漫画压缩包 / 电子书整理工具。</p>
   <p>支持自动归类、重复检测、疑似重复隔离、历史记录追踪与回滚，适合个人长期整理本地归档库。</p>
   <p>
-    <a href="#快速开始"><strong>快速开始</strong></a>
+    <a href="#-快速开始"><strong>🚀 快速开始</strong></a>
     ·
-    <a href="#核心能力"><strong>核心能力</strong></a>
+    <a href="#-核心能力"><strong>✨ 核心能力</strong></a>
     ·
-    <a href="#使用示例"><strong>使用示例</strong></a>
+    <a href="#-使用示例"><strong>🧪 使用示例</strong></a>
     ·
-    <a href="#项目结构"><strong>项目结构</strong></a>
+    <a href="#-项目结构"><strong>🧱 项目结构</strong></a>
     ·
-    <a href="#风险与建议"><strong>风险与建议</strong></a>
+    <a href="#-风险与建议"><strong>⚠️ 风险与建议</strong></a>
   </p>
 </div>
 
@@ -20,9 +20,9 @@
 >
 > 当前仓库已经整理为 **包入口 + 单一核心实现** 的结构，目的是提升可读性、减少重复代码带来的维护风险。
 
-## 项目定位
+## 🎯 项目定位
 
-这是一个偏个人工作流的漫画归档整理工具，重点不是“功能堆满”，而是把最常见、最容易出错的整理流程收敛成一个**可预览、可执行、可回滚**的命令行工具。
+这是一个偏个人工作流的漫画归档整理工具，重点不是“功能堆满”，而是把最常见、最容易出错的整理流程收敛成一个 **可预览、可执行、可回滚** 的命令行工具。
 
 核心目标：
 
@@ -32,7 +32,7 @@
 - 保留历史记录与回滚能力
 - 尽量降低误整理带来的破坏性
 
-## 核心能力
+## ✨ 核心能力
 
 - 自动识别文件名中的社团 / 系列名并归档到对应目录
 - 支持漫画压缩包与常见电子书格式
@@ -42,9 +42,9 @@
 - 支持 `dry-run` 模拟执行、真实执行、查看历史、按会话回滚
 - 自动记录计划、执行状态与日志，便于排查整理结果
 
-## 支持格式
+## 🗂️ 支持格式
 
-### 压缩包
+### 📦 压缩包
 - `zip`
 - `rar`
 - `7z`
@@ -52,19 +52,19 @@
 - `gz`
 - `lz`
 
-### 漫画归档
+### 📖 漫画归档
 - `cbz`
 - `cbr`
 - `cb7`
 - `cbt`
 
-### 电子书
+### 📘 电子书
 - `epub`
 - `pdf`
 - `mobi`
 - `azw3`
 
-## 安装与运行
+## 🛠️ 安装与运行
 
 ### 直接运行
 
@@ -80,8 +80,7 @@ python3 -m comic_organizer <目录路径>
 python3 -m comic_organizer.cli <目录路径>
 ```
 
-<a id="快速开始"></a>
-## 快速开始
+## 🚀 快速开始
 
 ### 1. 先做一次模拟执行
 
@@ -107,7 +106,7 @@ python3 -m comic_organizer D:\Comics --list-sessions
 python3 -m comic_organizer D:\Comics --rollback latest
 ```
 
-## 使用示例
+## 🧪 使用示例
 
 ### 示例一：日常整理根目录中的新文件
 
@@ -135,7 +134,7 @@ python3 -m comic_organizer D:\Comics --scan-mode repair --dry-run
 python3 -m comic_organizer D:\Comics --scan-mode safe --execute --yes
 ```
 
-## 工作流说明
+## 🔄 工作流说明
 
 推荐顺序：
 
@@ -153,7 +152,7 @@ python3 -m comic_organizer D:\Comics --scan-mode safe --execute --yes
 - 保留记录
 - 出问题能撤回
 
-## 扫描模式
+## 🔍 扫描模式
 
 | 模式 | 说明 | 适用场景 | 风险等级 |
 | --- | --- | --- | --- |
@@ -161,7 +160,7 @@ python3 -m comic_organizer D:\Comics --scan-mode safe --execute --yes
 | `repair` | 在 `safe` 基础上，再扫描一级子目录中的直接子文件 | 修补历史整理结果 | 中 |
 | `full` | 递归扫描整个目录树 | 大范围重整 | 高 |
 
-## 目录与状态说明
+## 🧾 目录与状态说明
 
 | 路径 / 名称 | 用途 |
 | --- | --- |
@@ -171,7 +170,7 @@ python3 -m comic_organizer D:\Comics --scan-mode safe --execute --yes
 | `.history/` | 保存每次执行的计划、状态与日志 |
 | `整理日志.txt` | 日志文件名常量（实际日志保存在历史会话目录） |
 
-## 识别逻辑概述
+## 🧠 识别逻辑概述
 
 脚本会综合以下信息判断目标目录：
 
@@ -187,8 +186,7 @@ python3 -m comic_organizer D:\Comics --scan-mode safe --execute --yes
 - 完整哈希
 - 归一化标题键
 
-<a id="项目结构"></a>
-## 项目结构
+## 🧱 项目结构
 
 ```text
 .
@@ -210,7 +208,7 @@ python3 -m comic_organizer D:\Comics --scan-mode safe --execute --yes
 - `comic_organizer/__main__.py`：支持 `python -m comic_organizer`
 - `pyproject.toml`：项目元数据与脚本入口配置
 
-## 一次整理后大致会变成什么样
+## 🗃️ 一次整理后大致会变成什么样
 
 ```text
 Comics/
@@ -224,8 +222,7 @@ Comics/
 └── 其他系列目录...
 ```
 
-<a id="风险与建议"></a>
-## 风险与建议
+## ⚠️ 风险与建议
 
 ### 使用前建议
 
@@ -245,7 +242,7 @@ Comics/
 - 再执行
 - 不要在执行后立刻大改目录结构
 
-## 适合什么人
+## 👥 适合什么人
 
 这个项目尤其适合：
 - 有大量漫画压缩包 / 电子书待整理的人
@@ -253,7 +250,7 @@ Comics/
 - 不想纯手工搬运文件，但又不想完全黑箱自动整理的人
 - 希望保留“可检查、可追踪、可回滚”能力的人
 
-## 后续计划
+## 🛣️ 后续计划
 
 - 继续拆分模块，提高可测试性
 - 补充测试样例与示例目录
