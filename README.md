@@ -1,58 +1,136 @@
-# Comic Organizer
+<div align="center">
+  <h1>漫画整理脚本</h1>
+  <p>面向中文使用场景的漫画压缩包 / 电子书整理工具，支持自动归类、重复检测、疑似重复隔离、执行记录与回滚。</p>
+  <p>
+    <a href="#功能概览"><strong>功能概览</strong></a>
+    ·
+    <a href="#使用方法"><strong>使用方法</strong></a>
+    ·
+    <a href="#扫描模式"><strong>扫描模式</strong></a>
+    ·
+    <a href="#安全建议"><strong>安全建议</strong></a>
+  </p>
+</div>
 
-A structured Python project version of a comic archive / ebook organizer script.
+> [!IMPORTANT]
+> 本项目主要面向中文区个人整理场景，README 以中文为主。脚本支持先模拟、后执行，并提供历史会话与回滚能力，建议先 `dry-run` 再正式整理。
 
-## Features
+## 功能概览
 
-- Multiple scan modes: `safe`, `repair`, `full`
-- `dry-run` preview before real execution
-- Real execution with confirmation protection
-- Duplicate detection by size + quick hash + full hash
-- Suspect duplicate detection by normalized title
-- Session history persistence under `.history/`
-- Rollback support for previous execution sessions
-- Supports archives and ebook-like files such as `zip`, `rar`, `7z`, `cbz`, `cbr`, `epub`, `pdf`, `mobi`, `azw3`
+- 自动识别文件名中的社团 / 系列名并归档到对应目录
+- 支持漫画压缩包与常见电子书格式
+- 支持重复文件检测，自动移入“重复区”
+- 支持疑似重复检测，自动移入“疑似重复待确认”
+- 支持 `safe / repair / full` 三种扫描模式
+- 支持 `dry-run` 模拟执行、真实执行、历史记录查看、回滚
+- 自动记录每次整理的计划、状态与日志
 
-## Installation
+## 支持格式
 
-### Run directly
+- 压缩包：`zip` / `rar` / `7z` / `tar` / `gz` / `lz`
+- 漫画归档：`cbz` / `cbr` / `cb7` / `cbt`
+- 电子书：`epub` / `pdf` / `mobi` / `azw3`
+
+## 使用方法
+
+### 1. 交互模式
 
 ```bash
-python3 -m comic_organizer /path/to/source --dry-run
+python3 comic_organizer.py <目录路径>
 ```
 
-### Optional editable install
+直接运行后可通过菜单选择：
+- 安全整理
+- 修历史归档
+- 全量重扫
+- 回滚上一次执行
+- 查看历史执行记录
+
+### 2. 模拟执行
 
 ```bash
-pip install -e .
-comic-organizer /path/to/source --dry-run
+python3 comic_organizer.py <目录路径> --scan-mode safe --dry-run
 ```
 
-## Usage
+### 3. 正式执行
 
 ```bash
-python3 -m comic_organizer /path/to/source --dry-run --scan-mode safe
-python3 -m comic_organizer /path/to/source --execute --scan-mode repair --yes
-python3 -m comic_organizer /path/to/source --list-sessions
-python3 -m comic_organizer /path/to/source --rollback latest
+python3 comic_organizer.py <目录路径> --scan-mode safe --execute --yes
 ```
 
-## Project Structure
+### 4. 查看历史记录
+
+```bash
+python3 comic_organizer.py <目录路径> --list-sessions
+```
+
+### 5. 回滚最近一次正式执行
+
+```bash
+python3 comic_organizer.py <目录路径> --rollback latest
+```
+
+## 扫描模式
+
+| 模式 | 说明 | 适用场景 |
+| --- | --- | --- |
+| `safe` | 只扫描根目录和“未分类归档”中的直接子文件 | 日常整理，风险最低 |
+| `repair` | 在 `safe` 基础上，再扫描一级子目录中的直接子文件 | 修补历史整理结果 |
+| `full` | 递归扫描整个目录树 | 大范围重整，风险最高 |
+
+## 目录与状态说明
+
+脚本会使用以下目录 / 文件：
+
+- `未分类归档`：无法识别归类目标时的落点
+- `疑似重复待确认`：标题高度相似、需要人工确认的文件
+- `重复区`：检测为重复文件时的落点
+- `.history/`：保存每次执行计划、状态与日志
+- `整理日志.txt`：日志文件名常量（实际历史日志位于 `.history` 会话目录中）
+
+## 安全建议
+
+1. 第一次使用务必先执行 `--dry-run`
+2. 不熟悉目录结构时，不要直接使用 `full`
+3. 重要数据先自行备份
+4. 如果整理结果不符合预期，可使用 `--rollback` 回滚
+
+## 识别逻辑概述
+
+脚本会综合以下信息判断目标目录：
+- 文件名中的方括号内容
+- 商业卷号格式
+- 字面标题
+- 模糊匹配已有目录名
+
+同时会结合：
+- 文件大小
+- 快速哈希
+- 完整哈希
+- 归一化标题键
+
+来判断重复与疑似重复。
+
+## 当前仓库结构
 
 ```text
 .
-├── comic_organizer/
-│   ├── __init__.py
-│   ├── __main__.py
-│   └── cli.py
-├── pyproject.toml
+├── comic_organizer.py
 ├── README.md
-├── README.zh-CN.md
 └── .gitignore
 ```
 
-## Notes
+## 后续可扩展方向
 
-- This repository currently keeps the original logic mostly intact in a single package module for safe migration.
-- The next step can be further refactoring into `config.py`, `session.py`, `detector.py`, `organizer.py`, etc.
-- Runtime artifacts such as `.history/` and `整理日志.txt` are ignored by Git.
+- 拆分为多模块项目结构
+- 补充测试样例
+- 增加配置文件支持
+- 增加更细粒度的忽略规则
+- 增加 Windows 可直接双击使用的启动方式
+
+## 说明
+
+这是一个偏个人工作流的整理工具，目标是：
+- 尽量减少手工搬运
+- 保留可回滚能力
+- 在中文命名环境下尽可能提高整理效率
