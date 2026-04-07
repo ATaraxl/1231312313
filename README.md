@@ -2,6 +2,8 @@
   <h1>1231312313</h1>
   <p>Minimal structured repository created by Minis for permission verification.</p>
   <p>
+    <a href="./README.zh-CN.md"><strong>中文</strong></a>
+    ·
     <a href="#module"><strong>Module</strong></a>
     ·
     <a href="#notes"><strong>Notes</strong></a>
