@@ -1,9 +1,0 @@
-#!name=Minis Test
-#!desc=Temporary write-permission verification module created by Minis
-#!system=ios
-
-[General]
-# This file is only for permission testing.
-
-[Rule]
-DOMAIN-SUFFIX,example.com,DIRECT
