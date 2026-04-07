@@ -1,24 +1,56 @@
 <div align="center">
-  <h1>📚 漫画整理脚本</h1>
-  <p>一个面向中文使用场景的漫画压缩包 / 电子书整理工具。</p>
-  <p>支持自动归类、重复检测、疑似重复隔离、历史记录追踪与回滚，适合个人长期整理本地归档库。</p>
-  <p>
-    <a href="#-快速开始"><strong>🚀 快速开始</strong></a>
-    ·
-    <a href="#-核心能力"><strong>✨ 核心能力</strong></a>
-    ·
-    <a href="#-使用示例"><strong>🧪 使用示例</strong></a>
-    ·
-    <a href="#-项目结构"><strong>🧱 项目结构</strong></a>
-    ·
-    <a href="#-风险与建议"><strong>⚠️ 风险与建议</strong></a>
-  </p>
+
+# 📚 漫画整理脚本
+
+**面向中文使用场景的漫画压缩包 / 电子书整理工具**
+
+支持 **自动归类**、**重复检测**、**疑似重复隔离**、**历史记录追踪** 与 **回滚**，适合个人长期整理本地归档库。
+
+<p>
+  <img alt="python" src="https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white">
+  <img alt="platform" src="https://img.shields.io/badge/Platform-CLI-4EAA25">
+  <img alt="status" src="https://img.shields.io/badge/Status-Active-2ea44f">
+  <img alt="language" src="https://img.shields.io/badge/README-%E4%B8%AD%E6%96%87-blue">
+</p>
+
+<p>
+  <a href="#-快速开始"><strong>🚀 快速开始</strong></a>
+  ·
+  <a href="#-核心能力"><strong>✨ 核心能力</strong></a>
+  ·
+  <a href="#-使用示例"><strong>🧪 使用示例</strong></a>
+  ·
+  <a href="#-项目结构"><strong>🧱 项目结构</strong></a>
+  ·
+  <a href="#-风险与建议"><strong>⚠️ 风险与建议</strong></a>
+</p>
+
 </div>
 
 > [!IMPORTANT]
 > 本项目主要面向中文区个人整理场景，README 以中文为主。
 >
 > 当前仓库已经整理为 **包入口 + 单一核心实现** 的结构，目的是提升可读性、减少重复代码带来的维护风险。
+
+## 🌟 这个项目解决什么问题？
+
+很多本地漫画 / 电子书目录在长期积累后，都会出现这些问题：
+
+- 新文件堆在根目录，越堆越乱
+- 同一系列命名不统一，难以归档
+- 重复文件混在一起，不敢随便删
+- 标题相近但不确定是否重复，需要人工确认
+- 手工整理费时费力，一次整理失误又很难撤回
+
+这个项目的目标，就是把这类问题收敛成一套 **先预览、再执行、可追踪、可回滚** 的整理流程。
+
+## ✅ 为什么适合长期使用
+
+- **先模拟再执行**：先看整理计划，再决定是否真正移动文件
+- **重复与疑似重复分流**：尽量避免误覆盖、误删除
+- **保留历史记录**：每次整理都有执行记录与状态追踪
+- **支持回滚**：整理不是一次性赌博，出问题还能撤回
+- **中文场景友好**：更贴近中文 / 日文混合命名环境
 
 ## 🎯 项目定位
 
